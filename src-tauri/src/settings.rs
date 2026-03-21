@@ -399,6 +399,8 @@ pub struct AppSettings {
     pub ort_accelerator: OrtAcceleratorSetting,
     #[serde(default)]
     pub extra_recording_buffer_ms: u64,
+    #[serde(default)]
+    pub disable_permission_check_on_startup: bool,
 }
 
 fn default_model() -> String {
@@ -484,6 +486,10 @@ fn default_app_language() -> String {
 
 fn default_show_tray_icon() -> bool {
     true
+}
+
+fn default_disable_permission_check_on_startup() -> bool {
+    false
 }
 
 fn default_post_process_provider_id() -> String {
@@ -768,6 +774,7 @@ pub fn get_default_settings() -> AppSettings {
         whisper_accelerator: WhisperAcceleratorSetting::default(),
         ort_accelerator: OrtAcceleratorSetting::default(),
         extra_recording_buffer_ms: 0,
+        disable_permission_check_on_startup: default_disable_permission_check_on_startup(),
     }
 }
 
