@@ -1,0 +1,19 @@
+name: Build macOS ARM
+
+on:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build-macos-arm:
+        uses: ./.github/workflows/build.yml
+        with:
+            platform: macos-26
+            target: aarch64-apple-darwin
+            build-args: ""
+            upload-artifacts: true
+            sign-binaries: false
+        secrets: inherit

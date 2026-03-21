@@ -113,6 +113,18 @@ fn show_main_window(app: &AppHandle) {
 
 #[allow(unused_variables)]
 fn should_force_show_permissions_window(app: &AppHandle) -> bool {
+    #[cfg(target_os = "macos")]
+    {
+        let cli_args = app.state::<CliArgs>();
+        let settings = settings::get_settings(app);
+
+        // Skip permission check if disabled via CLI flag or setting
+        if cli_args.disable_permission_check || settings.disable_permission_check_on_startup {
+            log::info!("Accessibility permission check disabled via CLI flag or setting");
+            return false;
+        }
+    }
+
     #[cfg(target_os = "windows")]
     {
         let model_manager = app.state::<Arc<ModelManager>>();

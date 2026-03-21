@@ -26,4 +26,8 @@ pub struct CliArgs {
     /// Enable debug mode with verbose logging
     #[arg(long)]
     pub debug: bool,
+
+    /// Disable accessibility permission checks on startup (macOS only)
+    #[arg(long)]
+    pub disable_permission_check: bool,
 }
