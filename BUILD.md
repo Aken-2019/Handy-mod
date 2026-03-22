@@ -62,13 +62,36 @@ cd Handy
 bun install
 ```
 
-### 3. Start Dev Server
+### 3. Download Required VAD Model
+
+The Voice Activity Detection (VAD) model is required for audio processing:
 
 ```bash
-bun tauri dev
+mkdir -p src-tauri/resources/models
+curl -o src-tauri/resources/models/silero_vad_v4.onnx https://blob.handy.computer/silero_vad_v4.onnx
 ```
 
-### 4. Build for Production
+### 4. Start Dev Server
+
+#### macOS
+
+```bash
+bun run tauri dev
+```
+
+If you encounter cmake errors, set the policy version:
+
+```bash
+CMAKE_POLICY_VERSION_MINIMUM=3.5 bun run tauri dev
+```
+
+#### Other Platforms
+
+```bash
+bun run tauri dev
+```
+
+### 5. Build for Production
 
 ```bash
 bun run tauri build
